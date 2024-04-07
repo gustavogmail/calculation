@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "npx nodemon src/server.ts --watch 'src/' -e ts",
+    "dev:server": "npx nodemon src/server.ts --watch 'src/' -e ts",
+    "build:client": "cd src/client/my-app && npm install && npm run build",
     "compile": "npx tsc",
     "start": "node ./dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -19,8 +20,7 @@
     "express": "^4.19.2",
     "express-async-errors": "^3.1.1",
     "helmet": "^7.1.0",
-    "morgan": "^1.10.0",
-    "socket.io": "^4.7.5"
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",

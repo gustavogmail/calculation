@@ -1,5 +1,18 @@
-import Task from 'src/models/task';
+import { Request, Response, NextFunction } from 'express';
+import Task from '../models/task';
+import SubmittedTask from "../models/submittedTask";
 import taskService from '../services/taskService';
+import taskRepository from '../repositories/taskRepository';
+
+async function getTasks(req: Request, res: Response, next: NextFunction) {
+    const tasks = await taskRepository.getTasks();
+    res.json(tasks);
+}
+
+async function getSubmittedTasks(req: Request, res: Response, next: NextFunction) {
+    const tasks = await taskRepository.getSubmittedTasks();
+    res.json(tasks);
+}
 
 async function getTask(): Promise<Task> {
     const task = taskService.getTask();
@@ -8,6 +21,8 @@ async function getTask(): Promise<Task> {
     console.log('TASK OPERATION', (await task).operation);
     console.log('TASK LEFT', (await task).left);
     console.log('TASK RIGHT', (await task).right);
+    const newTask = new Task((await task).id, (await task).operation, (await task).left, (await task).right)
+    const result = await taskRepository.addTask(newTask);
     return task;
 }
 
@@ -15,9 +30,17 @@ async function calculateTask(): Promise<number> {
     const task = getTask();
     const result = findResult(await task);
     const submittedResult = taskService.submitTask((await task).id, result);
+    const newTask = new SubmittedTask(
+        (await task).id,
+        (await task).operation,
+        (await task).left,
+        (await task).right,
+        (await submittedResult)
+    );
+    taskRepository.submitTask(newTask);
     console.log('============ GOT SUBMITTED ====== ');
     console.log(await submittedResult);
-    return result
+    return result;
 }
 
 function findResult(task: Task): number {
@@ -53,6 +76,8 @@ function findResult(task: Task): number {
 }
 
 export default {
+    getTasks,
+    getSubmittedTasks,
     getTask,
     calculateTask
 }

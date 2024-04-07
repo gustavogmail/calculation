@@ -1,5 +1,5 @@
 import axios from 'axios';
-import Task from 'src/models/task';
+import Task from '../models/task';
 
 async function getTask(): Promise<Task> {
     const response = await axios.get<Task>('https://interview.adpeai.com/api/v1/get-task');
