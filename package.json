@@ -13,7 +13,7 @@
     "lint:client": "cd src/client/my-app && npm run lint",
     "lint:server": "eslint src/**/*.ts",
     "run:server:local": "npx nodemon src/server.ts --watch 'src/' -e ts",
-    "copy:client": "cp -r src/client/my-app/build dist/client/my-app",
+    "copy:client": "cp -r src/client/my-app/build dist/client/my-app"
   },
   "keywords": [],
   "author": "",

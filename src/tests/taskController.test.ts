@@ -1,11 +1,11 @@
 import { Request, Response } from 'express';
-import controller from '../src/controllers/taskController';
-import taskRepository from '../src/repositories/taskRepository';
-import taskService from '../src/services/taskService';
-import Task from '../src/models/task';
+import controller from '../controllers/taskController';
+import taskRepository from '../repositories/taskRepository';
+import taskService from '../services/taskService';
+import Task from '../models/task';
 
-jest.mock('../src/services/taskService');
-jest.mock('../src/repositories/taskRepository');
+jest.mock('../services/taskService');
+jest.mock('../repositories/taskRepository');
 
 describe('Controller Tests', () => {
   let mockRequest: Partial<Request>;

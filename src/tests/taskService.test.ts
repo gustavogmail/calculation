@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosHeaders, AxiosInstance, AxiosRequestHeaders } from 'axios';
-import service from '../src/services/taskService';
+import service from '../services/taskService';
 
 jest.mock('axios');
 

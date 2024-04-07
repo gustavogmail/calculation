@@ -1,6 +1,6 @@
-import Task from "../src/models/task";
-import SubmittedTask from "../src/models/submittedTask";
-import repository from "../src/repositories/taskRepository";
+import Task from "../models/task";
+import SubmittedTask from "../models/submittedTask";
+import repository from "../repositories/taskRepository";
 
 describe("Repository", () => {
   afterEach(() => {
