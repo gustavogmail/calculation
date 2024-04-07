@@ -64,5 +64,6 @@ export default {
     getTasks,
     getSubmittedTasks,
     getTask,
-    calculateTask
+    calculateTask,
+    findResult
 }

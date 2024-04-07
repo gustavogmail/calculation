@@ -50,5 +50,7 @@ export default {
   getTasks,
   getSubmittedTasks,
   addTask,
-  submitTask
+  submitTask,
+  tasks,
+  submittedTasks
 }
