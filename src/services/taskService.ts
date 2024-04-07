@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import Task from '../models/task';
 
 async function getTask(): Promise<Task> {
@@ -17,8 +17,24 @@ async function submitTask(id: string, result: number): Promise<string> {
       const response = await axios.post<string>(url, body);
       return response.data;
   } catch (error) {
-      console.error('Error submitting task:', error);
-      throw error;
+    if (axios.isAxiosError(error)) {
+        const axiosError: AxiosError = error;
+        if (axiosError.response && axiosError.response.status === 400) {
+            return axiosError.response.status.toString();
+        }
+        
+        if (axiosError.response && axiosError.response.status === 404) {
+          return axiosError.response.status.toString();
+        }
+
+        if (axiosError.response && axiosError.response.status === 503) {
+          return axiosError.response.status.toString();
+        }
+        
+    } else {
+        console.error('Error submitting task:', error);
+    }
+    throw error;
   }
 }
 

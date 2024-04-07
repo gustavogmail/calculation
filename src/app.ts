@@ -33,7 +33,7 @@ async function startApp() {
     try {
         const num = await taskController.calculateTask();
     } catch (error) {
-        console.error('Ocorreu um erro ao obter tarefa:', error);
+        console.error('Ocorreu um erro ao calcular a tarefa:', error);
     }
 };
 
