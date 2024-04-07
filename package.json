@@ -4,10 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev:server": "npx nodemon src/server.ts --watch 'src/' -e ts",
+    "run:server:local": "npx nodemon src/server.ts --watch 'src/' -e ts",
+    "copy:client": "cp -r src/client/my-app/build dist/client/my-app",
     "build:client": "cd src/client/my-app && npm install && npm run build",
-    "compile": "npx tsc",
-    "start": "node ./dist/server.js",
+    "build:server": "npx tsc && npm run copy:client",
+    "compile": "npm run build:client && npm run build:server",
+    "start": "npm run compile && node ./dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -27,6 +29,7 @@
     "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.21",
     "@types/helmet": "^4.0.0",
+    "@types/jest": "^29.5.12",
     "@types/morgan": "^1.9.9",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.4"

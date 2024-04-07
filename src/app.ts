@@ -18,9 +18,6 @@ app.use(helmet());
 app.use(express.json());
 
 // Servir a aplicação client buildada
-app.use(express.static(path.join(__dirname, 'public')));
-
-// Servir a aplicação client buildada
 app.use(express.static(path.join(__dirname, 'client', 'my-app', 'build')));
 
 app.use('/tasks/', taskRouter);
