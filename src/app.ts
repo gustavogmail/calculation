@@ -1,5 +1,5 @@
 import 'express-async-errors';
-import express, { Request, Response, NextFunction } from 'express';
+import express, { Request, Response } from 'express';
 import path from 'path';
 import cors from 'cors';
 import morgan from 'morgan';
@@ -22,13 +22,13 @@ app.use(express.static(path.join(__dirname, 'client', 'my-app', 'build')));
 
 app.use('/tasks/', taskRouter);
  
-app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
+app.use((error: Error, req: Request, res: Response) => {
     res.status(500).send(error.message);
 });
 
 async function startApp() {
     try {
-        const num = await taskController.calculateTask();
+        await taskController.calculateTask();
     } catch (error) {
         console.error('Ocorreu um erro ao calcular a tarefa:', error);
     }

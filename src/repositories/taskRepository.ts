@@ -5,13 +5,13 @@ const tasks: Task[] = [];
 const submittedTasks: SubmittedTask[] = [];
 
 async function getTasks(): Promise<Task[]> {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     return resolve(tasks)
   });
 }
 
 async function getSubmittedTasks(): Promise<SubmittedTask[]> {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     return resolve(submittedTasks)
   });
 }

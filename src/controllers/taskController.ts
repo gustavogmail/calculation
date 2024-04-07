@@ -1,15 +1,15 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response } from 'express';
 import Task from '../models/task';
 import SubmittedTask from "../models/submittedTask";
 import taskService from '../services/taskService';
 import taskRepository from '../repositories/taskRepository';
 
-async function getTasks(req: Request, res: Response, next: NextFunction) {
+async function getTasks(req: Request, res: Response) {
     const tasks = await taskRepository.getTasks();
     res.json(tasks);
 }
 
-async function getSubmittedTasks(req: Request, res: Response, next: NextFunction) {
+async function getSubmittedTasks(req: Request, res: Response) {
     const tasks = await taskRepository.getSubmittedTasks();
     res.json(tasks);
 }
@@ -17,7 +17,7 @@ async function getSubmittedTasks(req: Request, res: Response, next: NextFunction
 async function getTask(): Promise<Task> {
     const task = taskService.getTask();
     const newTask = new Task((await task).id, (await task).operation, (await task).left, (await task).right)
-    const result = await taskRepository.addTask(newTask);
+    await taskRepository.addTask(newTask);
     return task;
 }
 
