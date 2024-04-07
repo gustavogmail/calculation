@@ -1,0 +1,31 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+</head>
+<body>
+    <h1>Lista de Itens</h1>
+    <ul id="lista-itens">
+        <!-- Os itens serão adicionados dinamicamente aqui -->
+    </ul>
+
+    <script src="https://cdn.socket.io/4.1.2/socket.io.min.js"></script>
+    <script>
+        const socket = io();
+
+        socket.on('dadosAtualizados', (dados) => {
+            // Limpe a lista antes de adicionar itens atualizados
+            const listaItens = document.getElementById('lista-itens');
+            listaItens.innerHTML = '';
+
+            // Adicione os novos itens à lista
+            dados.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = `ID: ${item.id}, Nome: ${item.name}, CPF: ${item.cpf}`;
+                listaItens.appendChild(li);
+            });
+        });
+    </script>
+</body>
+</html>
