@@ -20,7 +20,7 @@ async function submitTask(id: string, result: number): Promise<string> {
     if (axios.isAxiosError(error)) {
         const axiosError: AxiosError = error;
         if (axiosError.response && axiosError.response.status === 400) {
-            return axiosError.response.status.toString();
+          return axiosError.response.status.toString();
         }
         
         if (axiosError.response && axiosError.response.status === 404) {
@@ -32,7 +32,7 @@ async function submitTask(id: string, result: number): Promise<string> {
         }
         
     } else {
-        console.error('Error submitting task:', error);
+      console.error('Error submitting task:', error);
     }
     throw error;
   }
