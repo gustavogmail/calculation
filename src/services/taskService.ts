@@ -1,14 +1,17 @@
 import axios, { AxiosError } from 'axios';
 import Task from '../models/task';
 
+const path = 'https://interview.adpeai.com/api/v1';
+
 async function getTask(): Promise<Task> {
-  const response = await axios.get<Task>('https://interview.adpeai.com/api/v1/get-task');
+  const url = path + '/get-task';
+  const response = await axios.get<Task>(url);
   const data = await response.data;
   return data
 }
 
 async function submitTask(id: string, result: number): Promise<string> {
-  const url = 'https://interview.adpeai.com/api/v1/submit-task';
+  const url = path + '/submit-task';
   const body = {
     id: id,
     result: result
