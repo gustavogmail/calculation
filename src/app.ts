@@ -29,7 +29,7 @@ async function startApp() {
   try {
     await taskController.calculateTask();
   } catch (error) {
-    console.error('Ocorreu um erro ao calcular a tarefa:', error);
+    console.error('Error occurred while calculating the task:', error);
   }
 };
 
