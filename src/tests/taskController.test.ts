@@ -24,9 +24,29 @@ describe('Controller Tests', () => {
     jest.clearAllMocks();
   });
 
+  describe('getTask', () => {
+    it('should return a task', async () => {
+      // GIVEN
+      const taskData = { id: 1, operation: 'addition', left: 2, right: 3 };
+      const mockGetTask = jest.fn();
+      taskService.getTask = mockGetTask;
+      mockGetTask.mockResolvedValue(taskData);
+
+      // WHEN
+      const result = await controller.getTask();
+
+      // THEN
+      expect(result).toEqual(taskData);
+      expect(taskRepository.addTask).toHaveBeenCalledWith(expect.any(Task));
+    });
+  });
+
   describe('getTasks', () => {
     it('should return tasks', async () => {
+      // WHEN
       const tasks = await controller.getTasks(mockRequest as Request, mockResponse as Response);
+
+      // THEN
       expect(mockResponse.json).toHaveBeenCalledWith(tasks);
     });
   });
@@ -34,27 +54,16 @@ describe('Controller Tests', () => {
 
   describe('getSubmittedTasks', () => {
     it('should return submitted tasks', async () => {
+      // WHEN
       const tasks = await controller.getSubmittedTasks(mockRequest as Request, mockResponse as Response);
+      // THEN
       expect(mockResponse.json).toHaveBeenCalledWith(tasks);
-    });
-  });
-
-  describe('getTask', () => {
-    it('should return a task', async () => {
-      const taskData = { id: 1, operation: 'addition', left: 2, right: 3 };
-      const mockGetTask = jest.fn();
-      taskService.getTask = mockGetTask;
-      mockGetTask.mockResolvedValue(taskData);
-
-      const result = await controller.getTask();
-
-      expect(result).toEqual(taskData);
-      expect(taskRepository.addTask).toHaveBeenCalledWith(expect.any(Task));
     });
   });
 
   describe('calculateTask', () => {
     it('should calculate task properly', async () => {
+      // GIVEN
       const taskData = { id: 1, operation: 'addition', left: 2, right: 3, result: 5 };
       const mockGetTask = jest.fn();
       controller.getTask = mockGetTask;
@@ -66,8 +75,10 @@ describe('Controller Tests', () => {
       const mockRepoSubmitTask = jest.fn();
       taskRepository.submitTask = mockRepoSubmitTask;
 
+      // WHEN
       const result = await controller.calculateTask();
 
+      // THEN
       expect(result).toEqual(taskData.result);
       expect(taskService.submitTask).toHaveBeenCalled();
       expect(taskRepository.submitTask).toHaveBeenCalled();

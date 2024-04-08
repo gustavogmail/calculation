@@ -9,42 +9,45 @@ describe('taskService', () => {
   });
 
   it('should fetch task successfully', async () => {
+    // GIVEN
     const mockTask = { id: '123', operation: 'multiplication', left: 8, right: 2 };
     (axios.get as jest.MockedFunction<typeof axios.get>).mockResolvedValueOnce({ data: mockTask });
 
+    // WHEN
     const task = await service.getTask();
 
+    // THEN
     expect(task).toEqual(mockTask);
   });
 
   it('should submit task successfully', async () => {
+    // GIVEN
     const taskId = '123';
     const result = 42;
     const expectedResult = 'Success';
-
-    // Configura o mock para simular a resposta da API
     (axios.post as jest.MockedFunction<typeof axios.post>).mockResolvedValueOnce({ data: expectedResult } );
 
-    // Chama a função que será testada
+    // WHEN
     const response = await service.submitTask(taskId, result);
 
-    // Verifica se a resposta da função corresponde ao esperado
+    // THEN
     expect(response).toEqual(expectedResult);
   });
 
   it('should log an error if not an AxiosError', async () => {
+    // GIVEN
     const errorMessage = 'Unknown error';
     const id = '1';
     const result = 42;
     const error = new Error(errorMessage);
     (axios.post as jest.MockedFunction<typeof axios.post>).mockRejectedValueOnce(error);
+    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {}); 
   
-    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {}); // Espionar console.error
-  
+    // WHEN
     await expect(service.submitTask(id, result)).rejects.toThrow(errorMessage);
   
+    // THEN
     expect(consoleErrorSpy).toHaveBeenCalledWith('Error submitting task:', error);
-  
-    consoleErrorSpy.mockRestore(); // Restaurar o comportamento original de console.error
+    consoleErrorSpy.mockRestore();
   });
 });
