@@ -8,7 +8,7 @@ import taskRouter from './routers/taskRouter';
 import taskController from './controllers/taskController';
 
 const app = express();
- 
+
 app.use(morgan('tiny'));
 app.use(cors());
 app.use(helmet());
@@ -19,21 +19,21 @@ app.use(express.static(path.join(__dirname, 'client', 'my-app', 'build')));
 
 // Server router
 app.use('/tasks/', taskRouter);
- 
+
 app.use((error: Error, req: Request, res: Response) => {
-    res.status(500).send(error.message);
+  res.status(500).send(error.message);
 });
 
 // Main function
 async function startApp() {
-    try {
-        await taskController.calculateTask();
-    } catch (error) {
-        console.error('Ocorreu um erro ao calcular a tarefa:', error);
-    }
+  try {
+    await taskController.calculateTask();
+  } catch (error) {
+    console.error('Ocorreu um erro ao calcular a tarefa:', error);
+  }
 };
 
 // While application is running, it gets and submits tasks continuously
 setInterval(startApp, 2000);
- 
+
 export default app;

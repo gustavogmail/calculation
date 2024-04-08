@@ -31,7 +31,7 @@ describe('Controller Tests', () => {
     });
   });
 
-  
+
   describe('getSubmittedTasks', () => {
     it('should return submitted tasks', async () => {
       const tasks = await controller.getSubmittedTasks(mockRequest as Request, mockResponse as Response);
@@ -45,7 +45,7 @@ describe('Controller Tests', () => {
       const mockGetTask = jest.fn();
       taskService.getTask = mockGetTask;
       mockGetTask.mockResolvedValue(taskData);
-      
+
       const result = await controller.getTask();
 
       expect(result).toEqual(taskData);

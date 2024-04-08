@@ -4,10 +4,9 @@ import repository from "../repositories/taskRepository";
 
 describe("Repository", () => {
   afterEach(() => {
-    // Limpa os arrays após cada teste
     repository.tasks = [];
     repository.submittedTasks = [];
-});
+  });
 
   describe("getTasks", () => {
     it("deve retornar uma lista vazia de tarefas se não houver tarefas", async () => {
@@ -16,7 +15,6 @@ describe("Repository", () => {
     });
 
     it("deve retornar a lista de tarefas", async () => {
-      // Adiciona algumas tarefas para teste
       repository.addTask(new Task("1", "addition", 2, 3));
       repository.addTask(new Task("2", "subtraction", 5, 3));
 
@@ -32,7 +30,6 @@ describe("Repository", () => {
     });
 
     it("deve retornar a lista de tarefas enviadas", async () => {
-      // Adiciona algumas tarefas enviadas para teste
       repository.submitTask(new SubmittedTask("1", "addition", 2, 3, "5"));
       repository.submitTask(new SubmittedTask("2", "subtraction", 5, 3, "2"));
 
@@ -54,34 +51,4 @@ describe("Repository", () => {
       await expect(repository.submitTask(invalidTask)).rejects.toThrow('Invalid task.');
     });
   });
-
-  /*
-  describe("addTask", () => {
-    it("deve adicionar uma nova tarefa", async () => {
-      const taskToAdd = new Task("1", "addition", 2, 3);
-      await repository.addTask(taskToAdd);
-
-      const tasks = await repository.getTasks();
-      expect(tasks).toContainEqual(taskToAdd);
-    });
-
-    it("deve rejeitar uma tarefa inválida", async () => {
-      await expect(repository.addTask(new Task())).rejects.toThrowError("Invalid task.");
-    });
-  });
-
-  describe("submitTask", () => {
-    it("deve adicionar uma nova tarefa enviada", async () => {
-      const submittedTaskToAdd = new SubmittedTask("1", "addition", 2, 3, "5");
-      await repository.submitTask(submittedTaskToAdd);
-
-      const submittedTasks = await repository.getSubmittedTasks();
-      expect(submittedTasks).toContainEqual(submittedTaskToAdd);
-    });
-
-    it("deve rejeitar uma tarefa enviada inválida", async () => {
-      await expect(repository.submitTask(new SubmittedTask())).rejects.toThrowError("Invalid task.");
-    });
-  });
-  */
 });
