@@ -1,7 +1,9 @@
 {
   "name": "calculation",
   "version": "1.0.0",
-  "description": "",
+  "author": "Gustavo Saudade",
+  "description": "Application that performs basic mathematical operations.",
+  "license": "ISC",
   "main": "index.js",
   "scripts": {
     "start": "npm run compile && node ./dist/server.js",
@@ -13,11 +15,10 @@
     "lint:client": "cd src/client/my-app && npm run lint",
     "lint:server": "eslint src/**/*.ts",
     "run:server:local": "npx nodemon src/server.ts --watch 'src/' -e ts",
+    "run:client:local": "cd src/client/my-app && npm run start",
     "copy:client": "cp -r src/client/my-app/build dist/client/my-app"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "axios": "^1.6.8",
     "cors": "^2.8.5",
