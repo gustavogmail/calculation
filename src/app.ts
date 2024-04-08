@@ -10,22 +10,21 @@ import taskController from './controllers/taskController';
 const app = express();
  
 app.use(morgan('tiny'));
- 
 app.use(cors());
- 
 app.use(helmet());
- 
 app.use(express.json());
 
-// Servir a aplicação client buildada
+// Serve the built client application
 app.use(express.static(path.join(__dirname, 'client', 'my-app', 'build')));
 
+// Server router
 app.use('/tasks/', taskRouter);
  
 app.use((error: Error, req: Request, res: Response) => {
     res.status(500).send(error.message);
 });
 
+// Main function
 async function startApp() {
     try {
         await taskController.calculateTask();
@@ -34,6 +33,7 @@ async function startApp() {
     }
 };
 
+// While application is running, it gets and submits tasks continuously
 setInterval(startApp, 2000);
  
 export default app;

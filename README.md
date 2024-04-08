@@ -31,11 +31,11 @@ Application that performs basic mathematical operations.
 #### Unit Tests result:
   <img src="./assets/unit.png" />
 
-#### 1. Run the server locally:
+### 1. Run the server locally:
     npm run run:server:local
-#### 2. In a separated terminal tab, run the client locally:
+### 2. In a separated terminal tab, run the client locally:
     npm run run:client:local
-#### 3. Open the dashboard on:
+### 3. Open the dashboard on:
   http://localhost:3000
 
 

@@ -16,7 +16,12 @@ async function getSubmittedTasks(req: Request, res: Response) {
 
 async function getTask(): Promise<Task> {
     const task = taskService.getTask();
-    const newTask = new Task((await task).id, (await task).operation, (await task).left, (await task).right)
+    const newTask = new Task(
+        (await task).id, 
+        (await task).operation, 
+        (await task).left, 
+        (await task).right
+    )
     await taskRepository.addTask(newTask);
     return task;
 }
